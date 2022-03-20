@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+}
+
+.titles > h1, h3{
+    margin: 0;
+}
+
+.titles > h3 {
+    font-weight: normal;
+}
+
+.div-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 7vh;
+}
+
+.div-info-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15vh;
+}
+
+input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+input {
+    padding: 3%;
+    border-radius: 5px;
+    border: 1px solid #95D6F9;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#btn {
+    width: 100%;
+    border-radius: 20px;
+    background: #226183;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 82vh;
+    justify-content: space-between;
+}
+
+hr {
+    display: flex;
+    width: 100%;
+}

@@ -1,0 +1,9 @@
+body {
+    background: #95D6F9;
+    padding: 30px;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
