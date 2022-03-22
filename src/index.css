@@ -65,3 +65,41 @@ hr {
     display: flex;
     width: 100%;
 }
+
+.div-result {
+    font-family: 'Open Sans', sans-serif;
+    
+    
+}
+
+.div-span {
+    display: none;
+    flex-direction: column;
+    font-size: 40px;
+    background: #F6F6F6;
+    border-radius: 4px;
+    float: right;
+    padding: 10px;
+    animation-duration: 0.5s;
+    animation-name: animation;
+}
+
+@keyframes animation {
+    from {
+        opacity: 0;
+    }
+    
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+#span-legend {
+    font-size: 20px;
+}
+
+#span-erro {
+    color: red;
+}
