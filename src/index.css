@@ -94,12 +94,11 @@ hr {
     }
 }
 
-
-
 #span-legend {
     font-size: 20px;
 }
 
 #span-erro {
     color: red;
+    margin-bottom: 10px;
 }

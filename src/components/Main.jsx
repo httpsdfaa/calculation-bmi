@@ -5,8 +5,8 @@ export default class Main extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
-            valueWeight: '', 
+        this.state = {
+            valueWeight: '',
             valueHeight: '',
             formula: '',
             legend: '',
@@ -26,8 +26,12 @@ export default class Main extends React.Component {
     }
 
     handleChangeHeight = (e) => {
+
+        const number = parseInt(e.target.value)
+        let toLocale = number.toLocaleString('pt-br', { style: 'decimal', maximumFractionDigits : 2 })
+
         this.setState({
-            valueHeight: e.target.value
+            valueHeight: toLocale
         })
     }
 
@@ -35,60 +39,68 @@ export default class Main extends React.Component {
         e.preventDefault()
 
         let values = {
-            weight: this.state.valueWeight,
-            height: this.state.valueHeight
+            formula: this.state.valueWeight / (this.state.valueHeight * this.state.valueHeight)
         }
 
+        const formula = () => {
 
-        let formula = values.weight / (values.height * values.height)
-        formula = formula.toFixed(2)
+            if (!isNaN(values.formula) && !Infinity) {
+
+                let calculate = values.formula
+                calculate = calculate.toFixed(2)
+
+                const result = () => {
+                    let legendCategory = {
+                        magreza: 'Magreza',
+                        normal: 'Normal',
+                        sobrepeso: 'Sobrepeso',
+                        obesidade: 'Obesidade',
+                        obesidadeGravissima: 'Obesidade Grave'
+                    }
+
+                    //  TÍTULO DO RESULTADO PARA MOSTRAR QUANDO TIVER RESULTADO
+                    //  ATUALIZANDO A DIV
+                    let divSpan = document.querySelector('.div-span')
+                    if (formula !== '') {
+                        this.setState({ title: 'RESULTADO' })
+
+                        divSpan.style.display = 'flex'
+                    }
 
 
-        this.setState({ formula: formula})
+                    if (values.formula < 18.5) {
+                        this.setState({ legend: legendCategory.magreza })
+                    } else if (values.formula >= 18.5 && values.formula <= 24.9) {
+                        this.setState({ legend: legendCategory.normal })
+                    } else if (values.formula >= 25.0 && values.formula <= 29.9) {
+                        this.setState({ legend: legendCategory.sobrepeso })
+                    } else if (values.formula >= 30.0 && values.formula <= 39.9) {
+                        this.setState({ legend: legendCategory.obesidade })
+                    } else if (values.formula >= 40) {
+                        this.setState({ legend: legendCategory.obesidadeGravissima })
+                    }
+                }
 
-        /*let magreza = 18.5
-        let normal = (18.5, 24,9)
-        let sobrepeso = (25, 29.9)
-        let obesidade = (30, 39.9)
-        let obesidadeGrave = (40)*/
 
-        let legendCategory = {
-            magreza: 'Magreza',
-            normal: 'Normal',
-            sobrepeso: 'Sobrepeso',
-            obesidade: 'Obesidade',
-            obesidadeGravissima: 'Obesidade Grave'
+
+                this.setState({ formula: calculate })
+                result()
+
+                this.setState({ valueHeight: '', valueWeight: '' })
+                this.setState({ erro: '' })
+            } else {
+                this.setState({ erro: 'Por favor, digite novamente!' })
+                this.setState({ valueHeight: '', valueWeight: '' })
+            }
         }
 
-        //  TÍTULO DO RESULTADO PARA MOSTRAR QUANDO TIVER RESULTADO
-        //  ATUALIZANDO A DIV
-        let divSpan = document.querySelector('.div-span')
-        if(formula !== '') {
-            this.setState({ title: 'RESULTADO' })
-            
-            divSpan.style.display = 'flex'
-        }
-
-
-        //  LÓGICA RESULTADO
-        if(formula < 18.5) {
-            this.setState({ legend: legendCategory.magreza })
-        } else if (formula >= 18.5 && formula <= 24.9) {
-            this.setState({ legend: legendCategory.normal })
-        } else if (formula >= 25.0 && formula <= 29.9) {
-            this.setState({ legend: legendCategory.sobrepeso })
-        } else if (formula >= 30.0 && formula <= 39.9) {
-            this.setState({ legend: legendCategory.obesidade })
-        } else if (formula >= 40) {
-            this.setState({ legend: legendCategory.obesidadeGravissima })
-        }
-
+        formula()
     }
 
     render() {
 
         return (
-            
+
 
             <React.Fragment>
                 <div className="titles">
@@ -99,13 +111,13 @@ export default class Main extends React.Component {
                     <div className="div-info-input">
                         <div className="div-input">
                             <label htmlFor="weight">Digite seu peso: (ex.: 69,2)</label>
-                            <input type="text" id="weight" name="weight" placeholder="ex.: 69,2"
+                            <input type="number" id="weight" name="weight" placeholder="ex.: 69,2"
                                 onChange={this.handleChangeWeight}
                                 value={this.state.valueWeight}></input>
                         </div>
                         <div className="div-input">
                             <label htmlFor="height">Digite sua altura: (ex.: 1,70)</label>
-                            <input type="text" id="height" name="height" placeholder="ex.: 1,70"
+                            <input type="number" id="height" name="height" placeholder="ex.: 1,70"
                                 onChange={this.handleChangeHeight}
                                 value={this.state.valueHeight}></input>
                         </div>
