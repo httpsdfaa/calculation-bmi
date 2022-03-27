@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
+a {
+    text-decoration: none;
+}
+
 .titles {
     display: flex;
     flex-direction: column;
@@ -62,7 +66,6 @@ main {
 }
 
 hr {
-    display: flex;
     width: 100%;
 }
 
@@ -101,4 +104,57 @@ hr {
 #span-erro {
     color: red;
     margin-bottom: 10px;
+}
+
+section {
+    width: 100%;
+    height: 80vh;
+}
+
+section > a{
+    text-decoration: none;
+    color: #06405f;
+}
+
+section > div > p {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+section > div > p > span {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+#span-formula {
+    background: #f7f7f7;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+#lista-classificacao > h3 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+table {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+table > tbody > tr > td {
+    border: 1px solid rgb(130, 184, 219);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding: 12px 0 12px 0;
+}
+
+footer{
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    justify-content: center;
+    margin-top: 10vh;
 }
