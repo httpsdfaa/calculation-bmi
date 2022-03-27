@@ -27,12 +27,14 @@ export default class Main extends React.Component {
 
     handleChangeHeight = (e) => {
 
-        const number = parseInt(e.target.value)
-        let toLocale = number.toLocaleString('pt-br', { style: 'decimal', maximumFractionDigits : 2 })
+        let number = e.target.value //.toLocaleString('pt-br')
+        console.log(number.length)
 
-        this.setState({
-            valueHeight: toLocale
-        })
+        if (number.length === 1) {
+            number += '.'
+        }
+
+        this.setState({ valueHeight: number })
     }
 
     handleSubmit = (e) => {
@@ -44,7 +46,7 @@ export default class Main extends React.Component {
 
         const formula = () => {
 
-            if (!isNaN(values.formula) && !Infinity) {
+            if (!isNaN(values.formula)) {
 
                 let calculate = values.formula
                 calculate = calculate.toFixed(2)
@@ -84,8 +86,8 @@ export default class Main extends React.Component {
 
 
                 this.setState({ formula: calculate })
-                result()
 
+                result()
                 this.setState({ valueHeight: '', valueWeight: '' })
                 this.setState({ erro: '' })
             } else {
@@ -105,19 +107,19 @@ export default class Main extends React.Component {
             <React.Fragment>
                 <div className="titles">
                     <h1>CÁLCULO IMC</h1>
-                    <h3>Índice Massa Corporal</h3>
+                    <h3>Índice Massa Corpórea</h3>
                 </div>
                 <main>
                     <div className="div-info-input">
                         <div className="div-input">
                             <label htmlFor="weight">Digite seu peso: (ex.: 69,2)</label>
-                            <input type="number" id="weight" name="weight" placeholder="ex.: 69,2"
+                            <input type="text" id="weight" maxLength='4' name="weight" placeholder="ex.: 69,2"
                                 onChange={this.handleChangeWeight}
                                 value={this.state.valueWeight}></input>
                         </div>
                         <div className="div-input">
                             <label htmlFor="height">Digite sua altura: (ex.: 1,70)</label>
-                            <input type="number" id="height" name="height" placeholder="ex.: 1,70"
+                            <input type="text" id="height" maxLength='4' name="height" placeholder="ex.: 1,70"
                                 onChange={this.handleChangeHeight}
                                 value={this.state.valueHeight}></input>
                         </div>
@@ -132,8 +134,72 @@ export default class Main extends React.Component {
                         </div>
                     </div>
                     <hr />
+
                 </main>
+                <section>
+                    <a href='#div-como-calculado'>Como é calculado?</a>
+                    <br />
+                    <br />
+                    <br />
+                    <div id="div-como-calculado">
+                        <p>
+                            O Índice é calculado desta maneira:<br /><br />
+
+                            <span id="span-formula">peso / altura&#178;</span>
+                        </p>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div id="lista-classificacao">
+                        <h3>Interpretação do IMC</h3>
+                        <br/>
+                        <br/>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>IMC</td>
+                                <td>CLASSIFICAÇÃO</td>
+                                <td>GRAU</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Menor que 18,5</td>
+                                <td>Magreza</td>
+                                <td>0</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Entre 18,5 e 24,9</td>
+                                <td>Normal</td>
+                                <td>0</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Entre 25,0 e 29,9</td>
+                                <td>Sobrepeso</td>
+                                <td>I</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Entre 30,0 e 39,9</td>
+                                <td>Obesidade</td>
+                                <td>II</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Maior que 40,0</td>
+                                <td>Obesidade Grave</td>
+                                <td>III</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <footer>
+                    <span>Desenvolvido por <a target="_blank" rel="noreferrer" href="https://github.com/fernandedfa">Deivison Fernandes</a></span>
+                </footer>
             </React.Fragment>
+
         )
     }
 }
